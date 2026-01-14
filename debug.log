@@ -1,0 +1,8 @@
+[2026-01-13T02:55:46.126Z] Processing upload: dummy.png (image/png, 70 bytes)
+[2026-01-13T02:55:46.127Z] Upload Error: Error: EACCES: permission denied, open '/Users/kn/File/school/25y/prog3/prog3-blog/public/uploads/1768272946127-qnf2b3.png'
+[2026-01-13T02:56:09.719Z] Processing upload: test-image.png (image/png, 110 bytes)
+[2026-01-13T02:56:09.720Z] Upload Error: Error: EACCES: permission denied, open '/Users/kn/File/school/25y/prog3/prog3-blog/public/uploads/1768272969720-f7u2qg.png'
+[2026-01-13T02:56:38.043Z] Processing upload: dummy.png (image/png, 70 bytes)
+[2026-01-13T02:56:38.044Z] Upload Error: Error: EACCES: permission denied, open '/Users/kn/File/school/25y/prog3/prog3-blog/public/uploads/1768272998044-bv8cl.png'
+[2026-01-13T02:57:04.845Z] Processing upload: dummy.png (image/png, 70 bytes)
+[2026-01-13T02:57:04.846Z] Upload Error: Error: EACCES: permission denied, open '/Users/kn/File/school/25y/prog3/prog3-blog/public/uploads/1768273024846-sy84nx.png'
