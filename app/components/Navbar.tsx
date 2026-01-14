@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
+import MobileMenu from './MobileMenu';
 import { logout } from '../auth/actions';
 import { cookies } from 'next/headers';
 
@@ -28,19 +29,24 @@ export const Navbar = async () => {
                     </div>
                     {/* Home link removed as requested/implied redundancy */}
                     {user ? (
-                        <div className="flex items-center space-x-6">
-                            {/* Admin link removed as requested */}
-                            <Link href="/posts/create" className="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors">
-                                New Post
-                            </Link>
-                            <Link href={user.role === 'admin' ? '/admin/posts' : '/posts'} className="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors">
-                                Home
-                            </Link>
-                            <form action={logout}>
-                                <button className="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
-                                    Logout
-                                </button>
-                            </form>
+                        <div className="flex items-center">
+                            {/* Desktop Links */}
+                            <div className="hidden md:flex items-center space-x-6">
+                                <Link href="/posts/create" className="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors">
+                                    New Post
+                                </Link>
+                                <Link href={user.role === 'admin' ? '/admin/posts' : '/posts'} className="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors">
+                                    Home
+                                </Link>
+                                <form action={logout}>
+                                    <button className="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                                        Logout
+                                    </button>
+                                </form>
+                            </div>
+
+                            {/* Mobile Menu Trigger */}
+                            <MobileMenu user={user} />
                         </div>
                     ) : (
                         <div className="flex items-center space-x-6">

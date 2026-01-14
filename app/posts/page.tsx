@@ -29,7 +29,7 @@ export default async function MyPostsPage() {
 
     return (
         <div className="flex bg-slate-50 dark:bg-slate-950 h-[calc(100vh-100px)] border rounded-xl overflow-hidden border-slate-200 dark:border-slate-800">
-            <aside className="w-48 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800">
+            <aside className="w-48 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 hidden md:block">
                 <div className="p-6">
                     <h2 className="text-lg font-bold text-slate-800 dark:text-white">
                         My Blog

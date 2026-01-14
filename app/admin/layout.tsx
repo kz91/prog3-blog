@@ -22,7 +22,7 @@ export default async function AdminLayout({
 
     return (
         <div className="flex min-h-screen bg-slate-50 dark:bg-slate-950">
-            <aside className="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800">
+            <aside className="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 hidden md:block">
                 <div className="p-6">
                     <h2 className="text-xl font-bold text-slate-800 dark:text-white">
                         Admin Panel

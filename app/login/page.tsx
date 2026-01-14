@@ -11,8 +11,8 @@ export default async function LoginPage({
     const message = params?.message as string
 
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center p-8 bg-slate-50 dark:bg-slate-950">
-            <div className="w-full max-w-md bg-white dark:bg-slate-900 rounded-2xl shadow-xl p-8 border border-slate-200 dark:border-slate-800">
+        <div className="flex min-h-[100dvh] flex-col items-center justify-start sm:justify-center pt-10 sm:pt-0 p-0 sm:p-8 bg-white dark:bg-slate-900 sm:bg-slate-50 sm:dark:bg-slate-950">
+            <div className="w-full max-w-md bg-white dark:bg-slate-900 sm:rounded-2xl sm:shadow-xl p-6 sm:p-8 sm:border sm:border-slate-200 sm:dark:border-slate-800">
                 <h1 className="text-2xl font-bold mb-6 text-center text-slate-800 dark:text-slate-100">
                     Login
                 </h1>
