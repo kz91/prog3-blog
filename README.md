@@ -24,16 +24,7 @@ https://prog3-blog.vercel.app/
 * セッション管理はJSON形式のユーザーデータを含む `user_session` クッキーで行います。
 * `middleware.ts` により、保護されたルート（`/posts/create`、`/edit`、`/admin` など）への未認証アクセスをブロックします。
 
-```mermaid
-graph TD
-    A[Incoming Request] --> B{Check Session Cookie}
-    B -- No Cookie --> C{Is Route Protected?}
-    C -- Yes (e.g., /edit) --> D[Redirect to /login]
-    C -- No --> E[Allow Request]
-    B -- Cookie Exists --> F{Is Route Login/Signup?}
-    F -- Yes --> G[Redirect to /]
-    F -- No --> E
-```
+![メール認証フロー](docs/images/auth_flow.png)
 ### Post Management (新規投稿・編集)
 作成者および管理者は、専用のエディタから記事を作成・管理できます。
 * **リッチテキスト**: `react-markdown` によるMarkdown記法をサポート。
@@ -60,34 +51,7 @@ graph TD
 
 現在の開発フェーズでは、データへのアクセスをシンプルにするため、すべてのテーブルにおいてRow Level Security (RLS) は **無効化（Disabled）** されています。
 
-```mermaid
-erDiagram
-    users ||--o{ posts : writes
-    categories ||--o{ posts : classifies
-    users {
-        uuid id PK
-        text email UK
-        text password
-        text name
-        text role
-        timestamp created_at
-    }
-    categories {
-        uuid id PK
-        text name
-        timestamp created_at
-    }
-    posts {
-        uuid id PK
-        text title
-        text content
-        text thumbnail_url
-        boolean published
-        timestamp scheduled_at
-        uuid author_id FK
-        uuid category_id FK
-    }
-```
+![ER図](docs/images/er_diagram.png)
 * **`users`**: 認証およびユーザー情報の管理（`id`, `email`, `password`, `name`, `role`）。※パスワードは平文で保存される設計（開発用）。
 * **`categories`**: 記事のカテゴライズ（`id`, `name`）。
 * **`posts`**: メインコンテンツ。Markdownテキスト、添付ファイル（`attachments`）、投票データ（`poll` - JSONB）、画像パスなどを保持。`author_id` と `category_id` を介して他テーブルとリレーションを持ちます。
