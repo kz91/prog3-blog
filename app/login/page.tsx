@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { login } from '../auth/actions'
+import { ClearSearchParams } from '../components/ClearSearchParams'
 
 export default async function LoginPage({
     searchParams,
@@ -12,6 +13,7 @@ export default async function LoginPage({
 
     return (
         <div className="flex min-h-[100dvh] flex-col items-center justify-start sm:justify-center pt-10 sm:pt-0 p-0 sm:p-8 bg-white dark:bg-slate-900 sm:bg-slate-50 sm:dark:bg-slate-950">
+            <ClearSearchParams />
             <div className="w-full max-w-md bg-white dark:bg-slate-900 sm:rounded-2xl sm:shadow-xl p-6 sm:p-8 sm:border sm:border-slate-200 sm:dark:border-slate-800">
                 <h1 className="text-2xl font-bold mb-6 text-center text-slate-800 dark:text-slate-100">
                     Login
