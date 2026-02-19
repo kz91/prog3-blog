@@ -4,6 +4,8 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createClient } from '../lib/supabase/server'
 import { cookies } from 'next/headers'
+import { sendVerificationEmail } from '../../lib/email'
+import crypto from 'crypto'
 
 // Custom Auth Actions using public.users table
 
@@ -23,6 +25,10 @@ export async function login(formData: FormData) {
 
     if (error || !user) {
         return redirect(`/login?error=Invalid login credentials`)
+    }
+
+    if (!user.is_verified) {
+        return redirect(`/login?error=Email not verified. Please check your inbox.`)
     }
 
     // Create Session Cookie
@@ -56,6 +62,8 @@ export async function signup(formData: FormData) {
     const email = (formData.get('email') as string).trim()
     const password = (formData.get('password') as string).trim()
 
+    const verificationToken = crypto.randomBytes(32).toString('hex')
+
     // Insert into public.users
     const { error } = await supabase
         .from('users')
@@ -63,17 +71,33 @@ export async function signup(formData: FormData) {
             email,
             password, // Plaintext
             name: email.split('@')[0], // Default name
-            role: 'user'
+            role: 'user',
+            is_verified: false,
+            verification_token: verificationToken
         })
 
     if (error) {
         console.error('Signup Error:', error.message)
+        // Check for unique constraint violation (duplicate email)
+        if (error.code === '23505') {
+            return redirect(`/signup?error=${encodeURIComponent('This email is already registered. Please log in.')}`)
+        }
         return redirect(`/signup?error=${encodeURIComponent(error.message)}`)
     }
 
-    // Auto Login after signup? Or redirect to login.
-    // Let's redirect to login for simplicity
-    redirect('/login?message=Account created. Please log in.')
+    // Send Verification Email
+    try {
+        await sendVerificationEmail(email, verificationToken)
+    } catch (e) {
+        console.error('Failed to send verification email', e)
+        // Delete the user so they can try again
+        await supabase.from('users').delete().eq('email', email)
+
+        return redirect(`/signup?error=${encodeURIComponent('Failed to send verification email. Please try again.')}`)
+    }
+
+    // Redirect to login with message
+    redirect('/login?message=Account created. Please check your email to verify your account.')
 }
 
 export async function logout() {
