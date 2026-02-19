@@ -1,5 +1,6 @@
 ## Prog3-Blog
 
+Vercel Link:
 https://prog3-blog.vercel.app/
 
 ## 1. Project Overview
@@ -13,7 +14,7 @@ https://prog3-blog.vercel.app/
 * **Styling**: Tailwind CSS, Lucide React (Icons)
 * **Backend Logic**: Next.js Server Actions
 * **Database**: Supabase (PostgreSQL)
-* **Authentication**: Custom "Simple Auth" + Resend (メール認証)
+* **Authentication**: Resend (Mail Authentication)
 * **Image Storage**: Local filesystem (`public/uploads`) 
 
 ## 3. Key Features
@@ -25,6 +26,11 @@ https://prog3-blog.vercel.app/
 * `middleware.ts` により、保護されたルート（`/posts/create`、`/edit`、`/admin` など）への未認証アクセスをブロックします。
 
 ![メール認証フロー](docs/images/auth_flow.png)
+
+![サインアップ画面](docs/images/signup.png)
+
+![ログイン画面](docs/images/login.png)
+
 ### Post Management (新規投稿・編集)
 作成者および管理者は、専用のエディタから記事を作成・管理できます。
 * **リッチテキスト**: `react-markdown` によるMarkdown記法をサポート。
